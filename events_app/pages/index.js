@@ -21,16 +21,6 @@ export default function Home({ data }) {
         </nav>
       </header>
 
-      <main className={styles.main}>
-        {data.map((ev) => (
-          <Link key={ev.id} href={`events/${ev.id}`}>
-            <Image src={ev.image} alt="" width={300} height={300} />
-            <h2>{ev.title}</h2>
-            <p>{ev.description}</p>
-          </Link>
-        ))}
-      </main>
-
       <footer className={styles.footer}>
         <p> © 2023 learning nextJs</p>
       </footer>
