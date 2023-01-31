@@ -25,11 +25,8 @@ const EventPage = ({ data }) => {
 
       if (!response.ok) throw new Error(`Error: ${response.status}`);
       const data = await response.json();
-      console.log("POST", data);
       inputEmail.current.value = "";
-    } catch (e) {
-      console.log("error", e);
-    }
+    } catch (e) {}
   };
   return (
     <div>
@@ -59,7 +56,6 @@ export default EventPage;
 
 export async function getStaticPaths() {
   const { allEvents } = await import("/data/data.json");
-  console.log("allPaths", allEvents);
   const allPaths = allEvents.map((ev) => {
     return {
       params: {

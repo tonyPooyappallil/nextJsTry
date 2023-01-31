@@ -14,7 +14,6 @@ export default function handler(req, res) {
   const { method } = req;
 
   const filePath = buildPath();
-  console.log("filePath", filePath);
   const { events_categories, allEvents } = extractData(filePath);
 
   if (!allEvents)
