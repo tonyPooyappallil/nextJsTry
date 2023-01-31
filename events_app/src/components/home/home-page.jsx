@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const homePage = ({ data }) => {
-  <main className={styles.main}>
+export const HomePage = ({ data }) => (
+  <main>
     {data.map((ev) => (
       <Link key={ev.id} href={`events/${ev.id}`}>
         <Image src={ev.image} alt="" width={300} height={300} />
@@ -10,5 +10,5 @@ export const homePage = ({ data }) => {
         <p>{ev.description}</p>
       </Link>
     ))}
-  </main>;
-};
+  </main>
+);

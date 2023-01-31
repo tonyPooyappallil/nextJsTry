@@ -1,6 +1,36 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
+import { useRef } from "react";
 
 const EventPage = ({ data }) => {
+  const inputEmail = useRef();
+  const router = useRouter();
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const emailValue = inputEmail.current.value;
+    const eventId = router?.query.id;
+
+    try {
+      const response = await fetch("/api/email-registration", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailValue,
+          eventId,
+        }),
+      });
+
+      if (!response.ok) throw new Error(`Error: ${response.status}`);
+      const data = await response.json();
+      console.log("POST", data);
+      inputEmail.current.value = "";
+    } catch (e) {
+      console.log("error", e);
+    }
+  };
   return (
     <div>
       <Image
@@ -11,6 +41,16 @@ const EventPage = ({ data }) => {
       ></Image>
       <h1>{data.title}</h1>
       <p>{data.description}</p>
+
+      <form onSubmit={onSubmit}>
+        <label>get registred for this event</label>
+        <input
+          ref={inputEmail}
+          type="email"
+          placeholder="insert your email here"
+        ></input>
+        <button>Submit</button>
+      </form>
     </div>
   );
 };
